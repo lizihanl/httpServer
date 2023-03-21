@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <Meta charset="UTF-8">
+    <title>GET and POST</title>
+</head>
+<body>
+    <form name="input" action = "postReq.html" method = "post">
+        UserName：<input type="text" name="username">
+        Password：<input type="text" name="password">
+
+        <input type = "submit" value="POST REQUEST">
+    </form>
+    <p>
+        <a href="./getReq.html">GET REQUEST</a>
+    </p>
+    <!-- <form action = "postReq.html" method = "post"> -->
+        <!-- <label>name: -->
+            <!-- <input type ="text" name ="username" autocomplete="name"> -->
+        <!-- </label> -->
+        <!-- <button>POST REQEST</button> -->
+     <!-- </form> -->
+     <p>
+        <button onclick="myFunction()">HEAD REQEST</button>
+    </p>
+     <script>
+        function myFunction()
+        {
+            var xhr = new XMLHttpRequest(); // create XMLHttpRequest object
+            xhr.open('HEAD', '/', true); // Set the request method, URL, and asynchronous identity
+            xhr.onreadystatechange = function() { // Register event handlers
+            if (xhr.readyState === 4 && xhr.status === 200) { // The request was completed and successful
+                var contentType = xhr.getResponseHeader('Content-Type');
+                var contentLength = xhr.getResponseHeader('Content-Length');
+                // console.log('Content-Type:', contentType);
+                // console.log('Content-Length:', contentLength);
+            }
+            };
+            xhr.send(); // send request
+        }
+      </script>
+</body>
+</html>
