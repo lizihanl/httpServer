@@ -13,9 +13,10 @@
 #include <sys/errno.h>
 #include "http.h"
 #include "tcp.h"
+#include <ndbm.h>
 
 
-void postMethod(int accept_fd,char buff[1024])
+void postMethod(int accept_fd,char buff[1024], DBM *db)
 {
     char http_head[]="HTTP/1.1 200 OK\r\n"      \
                 "Content-Type: Text/Html\r\n"   \
@@ -25,6 +26,27 @@ void postMethod(int accept_fd,char buff[1024])
                 "\r\n"                            \
                 "<HTML><BODY>File Not Found</BODY><HTML>";
     ssize_t ret1;
+
+    char *token, *key_str, *value_str;
+    const char *delimiter = "&=";
+    token = strtok(buff, delimiter);
+
+     while (token != NULL) {
+        key_str = token;
+        token = strtok(NULL, delimiter);
+        value_str = token;
+        token = strtok(NULL, delimiter);
+
+        datum key, value;
+        key.dptr = key_str;
+        key.dsize = strlen(key_str);
+        value.dptr = value_str;
+        value.dsize = strlen(value_str);
+
+         if (dbm_store(db, key, value, DBM_REPLACE) != 0) {
+            fprintf(stderr, "Cannot store data\n");
+        }
+    }
 
     //Obtain the file name of the static web page to be accessed by the browser through the obtained data packet
     char http_fileName[128]="";
@@ -54,6 +76,11 @@ void postMethod(int accept_fd,char buff[1024])
     if(ret1<0){
         ERRLOG("Fail to send!");
     }
+
+    char *token, *key_str, *value_str;
+    const char *delimiter = "&=";
+    token = strtok(buff, delimiter);
+    
 //    The post data is read and stored in the database
     httpPostData(buff);
     //Read the web file and send it
@@ -371,6 +398,15 @@ int httpPostData(char postBuff[1024])
 
 int main()
 {
+    DBM *db;
+    datum key, value;
+
+     db = dbm_open("test.db", O_RDWR | O_CREAT, 0666);
+
+     if (!db) {
+        fprintf(stderr, "Cannot open database\n");
+        return 1;
+    }
     HttpParam_t httpparam;
     memset(httpparam.host, 0, sizeof(httpparam.host));
     memset(httpparam.url, 0, sizeof(httpparam.url));
@@ -386,6 +422,8 @@ int main()
 
 
     int re = http(httpparam);
+
+    dbm_close(db);
 
 //    free(httpparam.content);
     //printf("%s\n",content);
