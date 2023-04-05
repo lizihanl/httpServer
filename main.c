@@ -200,6 +200,16 @@ void headMethod(int accept_fd,char buff[1024])
 
 int http(HttpParam_t httpparam)
 {
+
+    DBM *db;
+    datum key, value;
+
+     db = dbm_open("test.db", O_RDWR | O_CREAT, 0666);
+
+     if (!db) {
+        fprintf(stderr, "Cannot open database\n");
+        return 1;
+    }
     //Check the number of command line parameters
     /*
     if (3 != argc)
@@ -315,7 +325,7 @@ int http(HttpParam_t httpparam)
                         getMethod(accept_fd,buff);
                     }
                     else if(strcmp(reqMethod,"POST")==0){
-                        postMethod(accept_fd,buff);
+                        postMethod(accept_fd,buff, db);
                     }
                     else if(strcmp(reqMethod,"HEAD")==0){
                         headMethod(accept_fd,buff);
