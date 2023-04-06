@@ -1,31 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ndbm.h>
+#include <db.h>
 
 int main() {
-    DBM *db;
-    datum key, value;
-
-    db = dbm_open("test.db", O_RDONLY, 0);
-
-    if (!db) {
-        fprintf(stderr, "Cannot open database\n");
-        return 1;
+    DB *db;
+    int ret;
+    if ((ret = db_create(&db, NULL, 0)) != 0) {
+        fprintf(stderr, "Failed to create DB: %s\n", db_strerror(ret));
+        exit(1);
+    }
+    if ((ret = db->open(db, NULL, "test.db", NULL, DB_HASH, DB_RDONLY, 0664)) != 0) {
+        fprintf(stderr, "Failed to open DB: %s\n", db_strerror(ret));
+        exit(1);
     }
 
-    key = dbm_firstkey(db);
+    DBT key, value;
+    memset(&key, 0, sizeof(key));
+    memset(&value, 0, sizeof(value));
+    datum dbkey, dbvalue;
+    dbkey.dptr = key.data;
+    dbkey.dsize = key.size;
+    dbvalue.dptr = value.data;
+    dbvalue.dsize = value.size;
 
-    while (key.dptr != NULL) {
-        value = dbm_fetch(db, key);
-
-        if (value.dptr != NULL) {
-            printf("%s=%s\n", key.dptr, value.dptr);
-        }
-
-        key = dbm_nextkey(db);
+    for (dbkey = dbm_firstkey(db); dbkey.dptr != NULL; dbkey = dbm_nextkey(db)) {
+        dbvalue = dbm_fetch(db, dbkey);
+        printf("%.*s: %.*s\n", (int)dbkey.dsize, (char *)dbkey.dptr, (int)dbvalue.dsize, (char *)dbvalue.dptr);
     }
 
-    dbm_close(db);
-
-    return 0;
+    db->close(db, 0);
 }
