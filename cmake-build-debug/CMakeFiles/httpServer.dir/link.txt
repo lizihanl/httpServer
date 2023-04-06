@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc -g CMakeFiles/httpServer.dir/main.c.o CMakeFiles/httpServer.dir/tcp.c.o -o httpServer  -ldb 

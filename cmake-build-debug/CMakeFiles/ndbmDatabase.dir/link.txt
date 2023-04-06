@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc -g CMakeFiles/ndbmDatabase.dir/ndbm.c.o -o ndbmDatabase  -ldb 
