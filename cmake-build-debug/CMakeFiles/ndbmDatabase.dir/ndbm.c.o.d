@@ -1,5 +1,5 @@
 CMakeFiles/ndbmDatabase.dir/ndbm.c.o: \
- /home/kevin/CLionProjects/httpServer/ndbm.c /usr/include/stdc-predef.h \
+ /home/kevin/CLionProjects/httpServer1/ndbm.c /usr/include/stdc-predef.h \
  /usr/include/stdio.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \

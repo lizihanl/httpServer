@@ -53,10 +53,10 @@ RM = /home/kevin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4167.35/bin/
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/CLionProjects/httpServer
+CMAKE_SOURCE_DIR = /home/kevin/CLionProjects/httpServer1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/CLionProjects/httpServer/cmake-build-debug
+CMAKE_BINARY_DIR = /home/kevin/CLionProjects/httpServer1/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/httpServer.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/httpServer.dir/flags.make
 CMakeFiles/httpServer.dir/main.c.o: CMakeFiles/httpServer.dir/flags.make
 CMakeFiles/httpServer.dir/main.c.o: ../main.c
 CMakeFiles/httpServer.dir/main.c.o: CMakeFiles/httpServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/httpServer.dir/main.c.o"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpServer.dir/main.c.o -MF CMakeFiles/httpServer.dir/main.c.o.d -o CMakeFiles/httpServer.dir/main.c.o -c /home/kevin/CLionProjects/httpServer/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/httpServer.dir/main.c.o"
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpServer.dir/main.c.o -MF CMakeFiles/httpServer.dir/main.c.o.d -o CMakeFiles/httpServer.dir/main.c.o -c /home/kevin/CLionProjects/httpServer1/main.c
 
 CMakeFiles/httpServer.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/httpServer.dir/main.c.i"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kevin/CLionProjects/httpServer/main.c > CMakeFiles/httpServer.dir/main.c.i
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kevin/CLionProjects/httpServer1/main.c > CMakeFiles/httpServer.dir/main.c.i
 
 CMakeFiles/httpServer.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/httpServer.dir/main.c.s"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kevin/CLionProjects/httpServer/main.c -o CMakeFiles/httpServer.dir/main.c.s
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kevin/CLionProjects/httpServer1/main.c -o CMakeFiles/httpServer.dir/main.c.s
 
 CMakeFiles/httpServer.dir/tcp.c.o: CMakeFiles/httpServer.dir/flags.make
 CMakeFiles/httpServer.dir/tcp.c.o: ../tcp.c
 CMakeFiles/httpServer.dir/tcp.c.o: CMakeFiles/httpServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/httpServer.dir/tcp.c.o"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpServer.dir/tcp.c.o -MF CMakeFiles/httpServer.dir/tcp.c.o.d -o CMakeFiles/httpServer.dir/tcp.c.o -c /home/kevin/CLionProjects/httpServer/tcp.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/httpServer.dir/tcp.c.o"
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpServer.dir/tcp.c.o -MF CMakeFiles/httpServer.dir/tcp.c.o.d -o CMakeFiles/httpServer.dir/tcp.c.o -c /home/kevin/CLionProjects/httpServer1/tcp.c
 
 CMakeFiles/httpServer.dir/tcp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/httpServer.dir/tcp.c.i"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kevin/CLionProjects/httpServer/tcp.c > CMakeFiles/httpServer.dir/tcp.c.i
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kevin/CLionProjects/httpServer1/tcp.c > CMakeFiles/httpServer.dir/tcp.c.i
 
 CMakeFiles/httpServer.dir/tcp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/httpServer.dir/tcp.c.s"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kevin/CLionProjects/httpServer/tcp.c -o CMakeFiles/httpServer.dir/tcp.c.s
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kevin/CLionProjects/httpServer1/tcp.c -o CMakeFiles/httpServer.dir/tcp.c.s
 
 # Object files for target httpServer
 httpServer_OBJECTS = \
@@ -109,7 +109,7 @@ httpServer: CMakeFiles/httpServer.dir/main.c.o
 httpServer: CMakeFiles/httpServer.dir/tcp.c.o
 httpServer: CMakeFiles/httpServer.dir/build.make
 httpServer: CMakeFiles/httpServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable httpServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable httpServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/httpServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/httpServer.dir/clean:
 .PHONY : CMakeFiles/httpServer.dir/clean
 
 CMakeFiles/httpServer.dir/depend:
-	cd /home/kevin/CLionProjects/httpServer/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kevin/CLionProjects/httpServer /home/kevin/CLionProjects/httpServer /home/kevin/CLionProjects/httpServer/cmake-build-debug /home/kevin/CLionProjects/httpServer/cmake-build-debug /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/httpServer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kevin/CLionProjects/httpServer1/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kevin/CLionProjects/httpServer1 /home/kevin/CLionProjects/httpServer1 /home/kevin/CLionProjects/httpServer1/cmake-build-debug /home/kevin/CLionProjects/httpServer1/cmake-build-debug /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles/httpServer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/httpServer.dir/depend
 

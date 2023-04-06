@@ -57,10 +57,10 @@ RM = /home/kevin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4167.35/bin/
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/CLionProjects/httpServer
+CMAKE_SOURCE_DIR = /home/kevin/CLionProjects/httpServer1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/CLionProjects/httpServer/cmake-build-debug
+CMAKE_BINARY_DIR = /home/kevin/CLionProjects/httpServer1/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles /home/kevin/CLionProjects/httpServer/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles /home/kevin/CLionProjects/httpServer1/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

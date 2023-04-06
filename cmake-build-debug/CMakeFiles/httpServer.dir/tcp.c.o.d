@@ -1,5 +1,5 @@
 CMakeFiles/httpServer.dir/tcp.c.o: \
- /home/kevin/CLionProjects/httpServer/tcp.c /usr/include/stdc-predef.h \
+ /home/kevin/CLionProjects/httpServer1/tcp.c /usr/include/stdc-predef.h \
  /usr/include/stdio.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
@@ -32,7 +32,7 @@ CMakeFiles/httpServer.dir/tcp.c.o: \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-float.h \
- /home/kevin/CLionProjects/httpServer/tcp.h /usr/include/db.h \
+ /home/kevin/CLionProjects/httpServer1/tcp.h /usr/include/db.h \
  /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-redhat-linux/12/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \

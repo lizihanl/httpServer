@@ -54,10 +54,10 @@ RM = /home/kevin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/222.4167.35/bin/
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/CLionProjects/httpServer
+CMAKE_SOURCE_DIR = /home/kevin/CLionProjects/httpServer1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/CLionProjects/httpServer/cmake-build-debug
+CMAKE_BINARY_DIR = /home/kevin/CLionProjects/httpServer1/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/ndbmDatabase.dir/clean
 CMakeFiles/httpServer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/httpServer.dir/build.make CMakeFiles/httpServer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/httpServer.dir/build.make CMakeFiles/httpServer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target httpServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target httpServer"
 .PHONY : CMakeFiles/httpServer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/httpServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/httpServer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/httpServer.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/httpServer.dir/clean:
 CMakeFiles/ndbmDatabase.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ndbmDatabase.dir/build.make CMakeFiles/ndbmDatabase.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ndbmDatabase.dir/build.make CMakeFiles/ndbmDatabase.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles --progress-num=4,5 "Built target ndbmDatabase"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles --progress-num=4,5 "Built target ndbmDatabase"
 .PHONY : CMakeFiles/ndbmDatabase.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ndbmDatabase.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ndbmDatabase.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/ndbmDatabase.dir/rule
 
 # Convenience name for target.

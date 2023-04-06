@@ -123,7 +123,8 @@ CMakeFiles/httpServer.dir/main.c.o: ../main.c \
   /usr/include/bits/types/struct___jmp_buf_tag.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthread_stack_min.h \
-  ../tcp.h
+  ../tcp.h \
+  /usr/include/gdbm.h
 
 CMakeFiles/httpServer.dir/tcp.c.o: ../tcp.c \
   /usr/include/stdc-predef.h \
@@ -246,6 +247,8 @@ CMakeFiles/httpServer.dir/tcp.c.o: ../tcp.c \
 ../tcp.h:
 
 /usr/include/bits/setjmp.h:
+
+/usr/include/gdbm.h:
 
 /usr/include/bits/types/struct_itimerspec.h:
 

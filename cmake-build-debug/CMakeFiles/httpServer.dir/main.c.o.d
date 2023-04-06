@@ -1,5 +1,5 @@
 CMakeFiles/httpServer.dir/main.c.o: \
- /home/kevin/CLionProjects/httpServer/main.c /usr/include/stdc-predef.h \
+ /home/kevin/CLionProjects/httpServer1/main.c /usr/include/stdc-predef.h \
  /usr/include/stdio.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
@@ -54,7 +54,7 @@ CMakeFiles/httpServer.dir/main.c.o: \
  /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /home/kevin/CLionProjects/httpServer/http.h /usr/include/db.h \
+ /home/kevin/CLionProjects/httpServer1/http.h /usr/include/db.h \
  /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-redhat-linux/12/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/pthread.h \
@@ -66,4 +66,4 @@ CMakeFiles/httpServer.dir/main.c.o: \
  /usr/include/bits/types/struct___jmp_buf_tag.h \
  /usr/include/bits/pthread_stack_min-dynamic.h \
  /usr/include/bits/pthread_stack_min.h \
- /home/kevin/CLionProjects/httpServer/tcp.h
+ /home/kevin/CLionProjects/httpServer1/tcp.h

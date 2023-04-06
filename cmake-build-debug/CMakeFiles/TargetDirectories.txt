@@ -1,4 +1,4 @@
-/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/httpServer.dir
-/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/ndbmDatabase.dir
-/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles/httpServer.dir
+/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles/ndbmDatabase.dir
+/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kevin/CLionProjects/httpServer1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

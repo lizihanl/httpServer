@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/kevin/CLionProjects/httpServer/ndbm.c" "CMakeFiles/ndbmDatabase.dir/ndbm.c.o" "gcc" "CMakeFiles/ndbmDatabase.dir/ndbm.c.o.d"
+  "/home/kevin/CLionProjects/httpServer1/ndbm.c" "CMakeFiles/ndbmDatabase.dir/ndbm.c.o" "gcc" "CMakeFiles/ndbmDatabase.dir/ndbm.c.o.d"
   )
 
 # Targets to which this target links.
