@@ -16,7 +16,7 @@
 #include <db.h>
 
 
-void postMethod(int accept_fd, char buff[1024])
+void postMethod(int accept_fd,char buff[1024])
 {
 
     char http_head[]="HTTP/1.1 200 OK\r\n"      \
@@ -27,6 +27,27 @@ void postMethod(int accept_fd, char buff[1024])
                 "\r\n"                            \
                 "<HTML><BODY>File Not Found</BODY><HTML>";
     ssize_t ret1;
+
+    char *token, *key_str, *value_str;
+    const char *delimiter = "&=";
+    token = strtok(buff, delimiter);
+
+     while (token != NULL) {
+        key_str = token;
+        token = strtok(NULL, delimiter);
+        value_str = token;
+        token = strtok(NULL, delimiter);
+
+        datum key, value;
+        key.dptr = key_str;
+        key.dsize = strlen(key_str);
+        value.dptr = value_str;
+        value.dsize = strlen(value_str);
+
+         if (dbm_store(db, key, value, DBM_REPLACE) != 0) {
+            fprintf(stderr, "Cannot store data\n");
+        }
+    }
 
     //Obtain the file name of the static web page to be accessed by the browser through the obtained data packet
     char http_fileName[128]="";
@@ -189,8 +210,6 @@ int http(HttpParam_t httpparam)
     //Create socket - Populate server network information structure - Bind - Listen
     int sockfd = socket_bind_listen(httpparam.host,httpparam.port);
 
-
-
     //Size of socket to listen in the fds array
     int max_fd;
     struct pollfd fds[MAXFDS];      //fds stores the socket to be listened
@@ -201,7 +220,6 @@ int http(HttpParam_t httpparam)
     fds[sockfd].fd=sockfd;
     fds[sockfd].events=POLLIN;//Data readable event (new client connection, client sending data, client disconnection)
     max_fd = sockfd;//Record the maximum file descriptor
-
 
     printf("listen_fd:%d\n",sockfd);
 
@@ -448,3 +466,4 @@ int main()
 
 
 }
+
