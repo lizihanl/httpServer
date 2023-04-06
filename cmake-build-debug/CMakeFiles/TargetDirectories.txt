@@ -1,3 +1,4 @@
-/Users/zihan/Documents/BCIT/COMP4981/httpServer/cmake-build-debug/CMakeFiles/httpServer.dir
-/Users/zihan/Documents/BCIT/COMP4981/httpServer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/zihan/Documents/BCIT/COMP4981/httpServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/httpServer.dir
+/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/ndbmDatabase.dir
+/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kevin/CLionProjects/httpServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

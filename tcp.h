@@ -5,6 +5,7 @@
 #ifndef HTTPSERVER_TCP_H
 #define HTTPSERVER_TCP_H
 
+#include <db.h>
 #define MAXFDS 1024
 #define ERRLOG(errmsg)                                       \
     do                                                       \

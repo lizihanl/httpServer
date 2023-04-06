@@ -13,11 +13,12 @@
 #include <sys/errno.h>
 #include "http.h"
 #include "tcp.h"
-#include <ndbm.h>
+#include <db.h>
 
 
-void postMethod(int accept_fd,char buff[1024], DBM *db)
+void postMethod(int accept_fd, char buff[1024])
 {
+
     char http_head[]="HTTP/1.1 200 OK\r\n"      \
                 "Content-Type: Text/Html\r\n"   \
                 "\r\n";
@@ -26,27 +27,6 @@ void postMethod(int accept_fd,char buff[1024], DBM *db)
                 "\r\n"                            \
                 "<HTML><BODY>File Not Found</BODY><HTML>";
     ssize_t ret1;
-
-    char *token, *key_str, *value_str;
-    const char *delimiter = "&=";
-    token = strtok(buff, delimiter);
-
-     while (token != NULL) {
-        key_str = token;
-        token = strtok(NULL, delimiter);
-        value_str = token;
-        token = strtok(NULL, delimiter);
-
-        datum key, value;
-        key.dptr = key_str;
-        key.dsize = strlen(key_str);
-        value.dptr = value_str;
-        value.dsize = strlen(value_str);
-
-         if (dbm_store(db, key, value, DBM_REPLACE) != 0) {
-            fprintf(stderr, "Cannot store data\n");
-        }
-    }
 
     //Obtain the file name of the static web page to be accessed by the browser through the obtained data packet
     char http_fileName[128]="";
@@ -77,10 +57,6 @@ void postMethod(int accept_fd,char buff[1024], DBM *db)
         ERRLOG("Fail to send!");
     }
 
-    char *token, *key_str, *value_str;
-    const char *delimiter = "&=";
-    token = strtok(buff, delimiter);
-    
 //    The post data is read and stored in the database
     httpPostData(buff);
     //Read the web file and send it
@@ -213,6 +189,8 @@ int http(HttpParam_t httpparam)
     //Create socket - Populate server network information structure - Bind - Listen
     int sockfd = socket_bind_listen(httpparam.host,httpparam.port);
 
+
+
     //Size of socket to listen in the fds array
     int max_fd;
     struct pollfd fds[MAXFDS];      //fds stores the socket to be listened
@@ -223,6 +201,7 @@ int http(HttpParam_t httpparam)
     fds[sockfd].fd=sockfd;
     fds[sockfd].events=POLLIN;//Data readable event (new client connection, client sending data, client disconnection)
     max_fd = sockfd;//Record the maximum file descriptor
+
 
     printf("listen_fd:%d\n",sockfd);
 
@@ -315,7 +294,7 @@ int http(HttpParam_t httpparam)
                         getMethod(accept_fd,buff);
                     }
                     else if(strcmp(reqMethod,"POST")==0){
-                        postMethod(accept_fd,buff);
+                        postMethod(accept_fd, buff);
                     }
                     else if(strcmp(reqMethod,"HEAD")==0){
                         headMethod(accept_fd,buff);
@@ -352,17 +331,17 @@ int http(HttpParam_t httpparam)
 
 int httpPostData(char postBuff[1024])
 {
-//    if(postBuff == NULL){
-//        return -1;
-//    }
+    if(postBuff == NULL){
+        return -1;
+    }
+
     struct PostData pData[2];
     char *prtData;
     prtData = strstr(postBuff , "\r\n\r\n");
     prtData += 4;
     int i=0,j=0;
-    int flag=0;             //is 0:key; 1:value
-    while (*prtData!='\0'){//(!(*prtData=='\r'&&*(prtData+1)=='\n')){
-//    for(int k=0;k<2;k++){
+    int flag=0; //is 0:key; 1:value
+    while (*prtData!='\0'){
         if(*prtData=='&'){
             pData[i].value[j]='\0';
             flag=0;
@@ -390,23 +369,63 @@ int httpPostData(char postBuff[1024])
             j++;
         }
     }
-    printf("%s: %s\n%s: %s\n",pData[0].key,pData[0].value,pData[1].key,pData[1].value);
-    //database
 
+    DB* db;
+    int dbret = db_create(&db, NULL, 0);
+    if (dbret != 0) {
+        // handle error
+    }
+
+    int flags = DB_CREATE; // set any flags you need
+    dbret = db->open(db, NULL, "mydb.db", NULL, DB_BTREE, flags, 0);
+    if (dbret != 0) {
+        // handle error
+    }
+
+
+
+    // Insert the key-value pairs into the database
+    DBT key, value;
+    memset(&key, 0, sizeof(key));
+    memset(&value, 0, sizeof(value));
+    for (int k = 0; k < 2; k++) {
+        key.data = pData[k].key;
+        key.size = strlen(pData[k].key) + 1;
+        value.data = pData[k].value;
+        value.size = strlen(pData[k].value) + 1;
+        int val = db->put(db, NULL, &key, &value, 0);
+        if (val != 0) {
+            return -1;
+        }
+    }
+
+
+    DBC* cursor;
+    dbret = db->cursor(db, NULL, &cursor, 0);
+    if(dbret != 0) {
+        return -1;
+    }
+
+    while((dbret = cursor->c_get(cursor, &key, &value, DB_NEXT)) == 0){
+        printf("Key: %.*s, Data: %.*s\n", (int)key.size, (char*)key.data, (int)value.size, (char*)value.data);
+    }
+
+    printf("%s: %s\n%s: %s\n", pData[0].key, pData[0].value, pData[1].key, pData[1].value);
+
+    if (dbret != DB_NOTFOUND) {
+        // handle error
+    }
+
+// Close the cursor and the database
+    cursor->c_close(cursor);
+    db->close(db, 0);
+
+    return 0;
 }
 
 
 int main()
 {
-    DBM *db;
-    datum key, value;
-
-     db = dbm_open("test.db", O_RDWR | O_CREAT, 0666);
-
-     if (!db) {
-        fprintf(stderr, "Cannot open database\n");
-        return 1;
-    }
     HttpParam_t httpparam;
     memset(httpparam.host, 0, sizeof(httpparam.host));
     memset(httpparam.url, 0, sizeof(httpparam.url));
@@ -423,11 +442,9 @@ int main()
 
     int re = http(httpparam);
 
-    dbm_close(db);
 
 //    free(httpparam.content);
     //printf("%s\n",content);
 
 
 }
-
