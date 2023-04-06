@@ -13,11 +13,12 @@
 #include <sys/errno.h>
 #include "http.h"
 #include "tcp.h"
-#include <ndbm.h>
+#include <db.h>
 
 
-void postMethod(int accept_fd,char buff[1024], DBM *db)
+void postMethod(int accept_fd,char buff[1024])
 {
+
     char http_head[]="HTTP/1.1 200 OK\r\n"      \
                 "Content-Type: Text/Html\r\n"   \
                 "\r\n";
@@ -26,27 +27,6 @@ void postMethod(int accept_fd,char buff[1024], DBM *db)
                 "\r\n"                            \
                 "<HTML><BODY>File Not Found</BODY><HTML>";
     ssize_t ret1;
-
-    char *token, *key_str, *value_str;
-    const char *delimiter = "&=";
-    token = strtok(buff, delimiter);
-
-     while (token != NULL) {
-        key_str = token;
-        token = strtok(NULL, delimiter);
-        value_str = token;
-        token = strtok(NULL, delimiter);
-
-        datum key, value;
-        key.dptr = key_str;
-        key.dsize = strlen(key_str);
-        value.dptr = value_str;
-        value.dsize = strlen(value_str);
-
-         if (dbm_store(db, key, value, DBM_REPLACE) != 0) {
-            fprintf(stderr, "Cannot store data\n");
-        }
-    }
 
     //Obtain the file name of the static web page to be accessed by the browser through the obtained data packet
     char http_fileName[128]="";
@@ -76,13 +56,33 @@ void postMethod(int accept_fd,char buff[1024], DBM *db)
     if(ret1<0){
         ERRLOG("Fail to send!");
     }
-
-    char *token, *key_str, *value_str;
-    const char *delimiter = "&=";
-    token = strtok(buff, delimiter);
+    // Store the post data in the database
+        DB_ENV *dbenv;
+        DB *dbp;
+        int ret;
+        /* Create a database environment */
+        if ((ret = db_env_create(&dbenv, 0)) != 0) {
+            fprintf(stderr, "Failed to create DB environment: %s\n", db_strerror(ret));
+            exit(1);
+        }
+        /* Open the database environment */
+        if ((ret = dbenv->open(dbenv, "/path/to/dbenv", DB_CREATE | DB_INIT_MPOOL, 0)) != 0) {
+            fprintf(stderr, "Failed to open DB environment: %s\n", db_strerror(ret));
+            exit(1);
+        }
+        /* Create a database */
+        if ((ret = db_create(&dbp, dbenv, 0)) != 0) {
+            fprintf(stderr, "Failed to create DB: %s\n", db_strerror(ret));
+            exit(1);
+        }
+        /* Open the database */
+        if ((ret = dbp->open(dbp, NULL, "/path/to/db", NULL, DB_BTREE, DB_CREATE, 0664)) != 0) {
+            fprintf(stderr, "Failed to open DB: %s\n", db_strerror(ret));
+            exit(1);
+        }
     
 //    The post data is read and stored in the database
-    httpPostData(buff);
+    httpPostData(buff, dbp);
     //Read the web file and send it
     size_t len_http_body;
     char http_body[1024]="";
@@ -360,19 +360,19 @@ int http(HttpParam_t httpparam)
 
 
 
-int httpPostData(char postBuff[1024])
+int httpPostData(char postBuff[1024], DB *db)
 {
-//    if(postBuff == NULL){
-//        return -1;
-//    }
+    if(postBuff == NULL){
+        return -1;
+    }
+
     struct PostData pData[2];
     char *prtData;
     prtData = strstr(postBuff , "\r\n\r\n");
     prtData += 4;
     int i=0,j=0;
-    int flag=0;             //is 0:key; 1:value
-    while (*prtData!='\0'){//(!(*prtData=='\r'&&*(prtData+1)=='\n')){
-//    for(int k=0;k<2;k++){
+    int flag=0; //is 0:key; 1:value
+    while (*prtData!='\0'){
         if(*prtData=='&'){
             pData[i].value[j]='\0';
             flag=0;
@@ -400,9 +400,26 @@ int httpPostData(char postBuff[1024])
             j++;
         }
     }
-    printf("%s: %s\n%s: %s\n",pData[0].key,pData[0].value,pData[1].key,pData[1].value);
-    //database
 
+    // Insert the key-value pairs into the database
+    DBT key, value;
+    memset(&key, 0, sizeof(key));
+    memset(&value, 0, sizeof(value));
+    for (int k = 0; k < 2; k++) {
+        key.data = pData[k].key;
+        key.size = strlen(pData[k].key) + 1;
+        value.data = pData[k].value;
+        value.size = strlen(pData[k].value) + 1;
+        int ret = db->put(db, NULL, &key, &value, 0);
+        if (ret != 0) {
+            fprintf(stderr, "Failed to insert key-value pair into database: %s\n", db_strerror(ret));
+            return -1;
+        }
+    }
+
+    printf("%s: %s\n%s: %s\n", pData[0].key, pData[0].value, pData[1].key, pData[1].value);
+
+    return 0;
 }
 
 
